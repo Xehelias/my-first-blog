@@ -1,177 +1,33 @@
-<!DOCTYPE html>
+{% load staticfiles %}
 <html>
-<body>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+	<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="page-header">
+	    <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <h1><a href="/">Django Girls Blog</a></h1>
+        </div>
 
-
-<h2 id="H1">Choose a Background Colour!</h2>
-
-
-<button type="button"
-value="Change to Blue"
-name="button1"
-onclick="document.bgColor='blue'"
-style="color:Blue">
-Blue.</button>
-
-
-<button type="button"
-value="Change to Yellow"
-name="button2"
-onclick="document.bgColor='yellow'"
-style="color:Yellow">
-Yellow.</button>
-
-
-<button type="button"
-value="Change to Green"
-name="button3"
-onclick="document.bgColor='green'"
-style="color:Green">
-Green.</button>
-
-
-<button type="button"
-value="Change to Red"
-name="button4"
-onclick="document.bgColor='red'"
-style="color:Red">
-Red.</button>
-
-
-<button type="button"
-value="Change to Purple"
-name="button5"
-onclick="document.bgColor='purple'"
-style="color:Purple">
-Purple.</button>
-
-
-<button type ="button"
-value="Change to White"
-name="button6"
-onclick="document.bgColor='white'"
-style="color:White">
-White.</button>
-
-
-<button type="button"
-value="Change to Black"
-name="button6"
-onclick="document.bgColor='black'"
-style="color:Black">
-Black.</button>
-
-
-<button type="button"
-value="Random"
-name="Button7"
-onclick="Brandom()"
-style="color:grey">
-Random.</button>
-
-
-<h2 id="H2">Choose a Font Colour!</h2>
-
-
-<button type="button"
-value="Change to Blue"
-name="button1"
-onclick="
-document.getElementById('H1').style.color='blue';
-document.getElementById('H2').style.color='blue'"
-style="color:Blue">
-Blue.</button>
-
-
-<button type="button"
-value="Change to Yellow"
-name="button2"
-onclick="
-document.getElementById('H1').style.color='yellow';
-document.getElementById('H2').style.color='yellow'"
-style="color:Yellow">
-Yellow.</button>
-
-
-<button type="button"
-value="Change to Green"
-name="button3"
-onclick="
-document.getElementById('H1').style.color='green';
-document.getElementById('H2').style.color='green'"
-style="color:Green">
-Green.</button>
-
-
-<button type="button"
-value="Change to Red"
-name="button4"
-onclick="
-document.getElementById('H1').style.color='red';
-document.getElementById('H2').style.color='red'"
-style="color:Red">
-Red.</button>
-
-
-<button type="button"
-value="Change to Purple"
-name="button5"
-onclick="
-document.getElementById('H1').style.color='purple';
-document.getElementById('H2').style.color='purple'"
-style="color:Purple">
-Purple.</button>
-
-
-<button type ="button"
-value="Change to White"
-name="button6"
-onclick="
-document.getElementById('H1').style.color='white';
-document.getElementById('H2').style.color='white'"
-style="color:White">
-White.</button>
-
-
-<button type="button"
-value="Change to Black"
-name="button6"
-onclick="
-document.getElementById('H1').style.color='black';
-document.getElementById('H2').style.color='black'"
-style="color:Black">
-Black.</button>
-
-
-<button type="button"
-value="Random"
-name="Button7"
-onclick="Frandom()"
-style="color:grey">
-Random.</button>
-
-
-<script>
-function Frandom() {
-document.getElementById('H1').style.color = FrandomColor();
-document.getElementById('H2').style.color = FrandomColor();
-}
-
-function FrandomColor() {
-return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
-</script>
-
-<script>
-function Brandom() {
-document.bgColor = BrandomColor();
-}
-
-function BrandomColor() {
-return '#' + Math.floor(Math.random() * 16777215).toString(16);
-}
-</script>
-
-
-</body>
+		
+	<div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% for post in posts %}
+                    <div class="post">
+                        <div class="date">
+                            {{ post.published_date }}
+                        </div>
+                        <h1><a href="">{{ post.title }}</a></h1>
+                        <p>{{ post.text|linebreaksbr }}</p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
